@@ -3,8 +3,9 @@
 ## Current State
 
 **Template Status**: ✅ Ready for development
+**Chrome Extension**: ✅ Built and ready to publish
 
-The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. It's ready for AI-assisted expansion to build any type of application.
+The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. A Chrome Extension for GK Summary / Exam Prep has been built alongside it.
 
 ## Recently Completed
 
@@ -14,6 +15,25 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] ESLint configuration
 - [x] Memory bank documentation
 - [x] Recipe system for common features
+- [x] **Chrome Extension: GK Summary - Exam Prep Key Points**
+  - [x] Manifest V3 configuration
+  - [x] Popup UI with 4 tabs (Summary, Key Points, Quiz, Saved)
+  - [x] Content script with floating action button and tooltip
+  - [x] Background service worker with context menus
+  - [x] Extractive summarization engine (no external API)
+  - [x] Key points extraction with category filtering
+  - [x] Quiz generation from page content
+  - [x] Save/export functionality
+  - [x] Copy-to-clipboard on all outputs
+  - [x] Bangla & English language support (20+ newspapers)
+  - [x] Dark mode support
+  - [x] Exam type presets (BCS, Bank Job, Admission, NTRCA)
+  - [x] Keyboard shortcut (Ctrl+Shift+S)
+  - [x] Right-click context menu
+  - [x] PNG icons (16, 32, 48, 128)
+  - [x] Privacy policy
+  - [x] README with publishing instructions
+  - [x] ZIP package for Chrome Web Store upload
 
 ## Current Structure
 
@@ -23,65 +43,37 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 | `src/app/layout.tsx` | Root layout | ✅ Ready |
 | `src/app/globals.css` | Global styles | ✅ Ready |
 | `.kilocode/` | AI context & recipes | ✅ Ready |
+| `chrome-extension/` | Chrome Extension | ✅ Ready to publish |
+| `gk-summary-extension.zip` | Publishable ZIP | ✅ Ready |
 
-## Current Focus
+## Chrome Extension Details
 
-The template is ready. Next steps depend on user requirements:
-
-1. What type of application to build
-2. What features are needed
-3. Design/branding preferences
-
-## Quick Start Guide
-
-### To add a new page:
-
-Create a file at `src/app/[route]/page.tsx`:
-```tsx
-export default function NewPage() {
-  return <div>New page content</div>;
-}
+### Architecture
+```
+chrome-extension/
+├── manifest.json              # Manifest V3
+├── background/service-worker.js  # Context menus, badge
+├── content/content-script.js     # Page interaction, FAB
+├── content/content-style.css     # Content styles
+├── popup/popup.html              # Main UI
+├── popup/popup.css               # Styles (420px wide)
+├── popup/popup.js                # All logic
+├── icons/icon{16,32,48,128}.png  # Extension icons
+├── README.md                     # Full documentation
+└── PRIVACY_POLICY.md             # Privacy policy
 ```
 
-### To add components:
-
-Create `src/components/` directory and add components:
-```tsx
-// src/components/ui/Button.tsx
-export function Button({ children }: { children: React.ReactNode }) {
-  return <button className="px-4 py-2 bg-blue-600 text-white rounded">{children}</button>;
-}
-```
-
-### To add a database:
-
-Follow `.kilocode/recipes/add-database.md`
-
-### To add API routes:
-
-Create `src/app/api/[route]/route.ts`:
-```tsx
-import { NextResponse } from "next/server";
-
-export async function GET() {
-  return NextResponse.json({ message: "Hello" });
-}
-```
-
-## Available Recipes
-
-| Recipe | File | Use Case |
-|--------|------|----------|
-| Add Database | `.kilocode/recipes/add-database.md` | Data persistence with Drizzle + SQLite |
-
-## Pending Improvements
-
-- [ ] Add more recipes (auth, email, etc.)
-- [ ] Add example components
-- [ ] Add testing setup recipe
+### Key Features
+- Extractive summarization (no external API needed)
+- Sentence scoring: position, title relevance, word frequency, GK keywords, numbers/dates
+- Bangla sentence splitting (।) and English splitting (.)
+- Quiz generation: number-based, true/false, fill-in-the-blank
+- Chrome Storage API for persistence
+- 100% offline, privacy-first
 
 ## Session History
 
 | Date | Changes |
 |------|---------|
 | Initial | Template created with base setup |
+| 2026-03-03 | Built Chrome Extension: GK Summary - Exam Prep Key Points |

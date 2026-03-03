@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GK Summary - Exam Prep</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <img src="../icons/icon32.png" alt="GK Summary" class="logo">
+        <h1>GK Summary</h1>
+      </div>
+      <div class="header-right">
+        <button id="btn-settings" class="icon-btn" title="Settings">⚙️</button>
+        <button id="btn-language" class="icon-btn lang-toggle" title="Switch Language">
+          <span id="lang-label">EN</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="tabs">
+      <button class="tab active" data-tab="summary">📝 Summary</button>
+      <button class="tab" data-tab="keypoints">🎯 Key Points</button>
+      <button class="tab" data-tab="quiz">📚 Quiz</button>
+      <button class="tab" data-tab="saved">💾 Saved</button>
+    </nav>
+
+    <!-- Summary Tab -->
+    <div id="tab-summary" class="tab-content active">
+      <div class="action-bar">
+        <button id="btn-summarize" class="btn btn-primary">
+          <span class="btn-icon">✨</span>
+          Summarize This Page
+        </button>
+        <select id="summary-length" class="select-small">
+          <option value="short">Short</option>
+          <option value="medium" selected>Medium</option>
+          <option value="detailed">Detailed</option>
+        </select>
+      </div>
+      
+      <div id="summary-loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>Analyzing content...</p>
+      </div>
+
+      <div id="summary-result" class="result-box hidden">
+        <div class="result-header">
+          <h3>📄 Summary</h3>
+          <div class="result-actions">
+            <button class="icon-btn copy-btn" data-target="summary-text" title="Copy">📋</button>
+            <button class="icon-btn save-btn" data-type="summary" title="Save">💾</button>
+          </div>
+        </div>
+        <div id="summary-text" class="result-text"></div>
+        <div class="meta-info">
+          <span id="summary-source" class="meta-tag"></span>
+          <span id="summary-date" class="meta-tag"></span>
+          <span id="summary-words" class="meta-tag"></span>
+        </div>
+      </div>
+
+      <!-- Selected Text Summary -->
+      <div id="selected-text-section" class="section hidden">
+        <div class="section-header">
+          <h3>✂️ Selected Text</h3>
+          <button id="btn-summarize-selected" class="btn btn-small">Summarize Selection</button>
+        </div>
+        <div id="selected-text-preview" class="preview-text"></div>
+      </div>
+    </div>
+
+    <!-- Key Points Tab -->
+    <div id="tab-keypoints" class="tab-content">
+      <div class="action-bar">
+        <button id="btn-keypoints" class="btn btn-primary">
+          <span class="btn-icon">🎯</span>
+          Extract Key Points
+        </button>
+        <select id="keypoints-category" class="select-small">
+          <option value="general">General Knowledge</option>
+          <option value="current-affairs">Current Affairs</option>
+          <option value="history">History</option>
+          <option value="geography">Geography</option>
+          <option value="science">Science</option>
+          <option value="economy">Economy</option>
+          <option value="politics">Politics</option>
+          <option value="sports">Sports</option>
+          <option value="international">International</option>
+        </select>
+      </div>
+
+      <div id="keypoints-loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>Extracting key points...</p>
+      </div>
+
+      <div id="keypoints-result" class="result-box hidden">
+        <div class="result-header">
+          <h3>🎯 Key Points for Exam</h3>
+          <div class="result-actions">
+            <button class="icon-btn copy-btn" data-target="keypoints-list" title="Copy All">📋</button>
+            <button class="icon-btn save-btn" data-type="keypoints" title="Save">💾</button>
+          </div>
+        </div>
+        <div id="keypoints-list" class="keypoints-container"></div>
+        
+        <!-- Important Facts -->
+        <div id="important-facts" class="facts-section hidden">
+          <h4>📌 Important Facts & Figures</h4>
+          <div id="facts-list" class="facts-container"></div>
+        </div>
+
+        <!-- Exam Tips -->
+        <div id="exam-tips" class="tips-section hidden">
+          <h4>💡 Exam Tips</h4>
+          <div id="tips-list" class="tips-container"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz Tab -->
+    <div id="tab-quiz" class="tab-content">
+      <div class="action-bar">
+        <button id="btn-generate-quiz" class="btn btn-primary">
+          <span class="btn-icon">📚</span>
+          Generate Quiz from Page
+        </button>
+        <select id="quiz-difficulty" class="select-small">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+
+      <div id="quiz-loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>Generating quiz questions...</p>
+      </div>
+
+      <div id="quiz-container" class="hidden">
+        <div class="quiz-progress">
+          <div class="progress-bar">
+            <div id="quiz-progress-fill" class="progress-fill"></div>
+          </div>
+          <span id="quiz-progress-text">Question 1 of 5</span>
+        </div>
+
+        <div id="quiz-question" class="quiz-question"></div>
+        <div id="quiz-options" class="quiz-options"></div>
+        
+        <div id="quiz-explanation" class="quiz-explanation hidden"></div>
+        
+        <div class="quiz-nav">
+          <button id="btn-prev-question" class="btn btn-small" disabled>← Previous</button>
+          <button id="btn-next-question" class="btn btn-small">Next →</button>
+        </div>
+      </div>
+
+      <div id="quiz-result" class="quiz-result hidden">
+        <h3>🏆 Quiz Complete!</h3>
+        <div id="quiz-score" class="quiz-score"></div>
+        <div id="quiz-review" class="quiz-review"></div>
+        <button id="btn-retry-quiz" class="btn btn-primary">🔄 Try Again</button>
+      </div>
+    </div>
+
+    <!-- Saved Tab -->
+    <div id="tab-saved" class="tab-content">
+      <div class="saved-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="summary">Summaries</button>
+        <button class="filter-btn" data-filter="keypoints">Key Points</button>
+        <button class="filter-btn" data-filter="flashcard">Flashcards</button>
+      </div>
+
+      <div id="saved-list" class="saved-list">
+        <div class="empty-state">
+          <span class="empty-icon">📂</span>
+          <p>No saved items yet</p>
+          <p class="empty-hint">Summarize pages and save them for later review</p>
+        </div>
+      </div>
+
+      <div class="saved-actions">
+        <button id="btn-export" class="btn btn-small">📤 Export All</button>
+        <button id="btn-clear-saved" class="btn btn-small btn-danger">🗑️ Clear All</button>
+      </div>
+    </div>
+
+    <!-- Settings Panel -->
+    <div id="settings-panel" class="settings-panel hidden">
+      <div class="settings-header">
+        <h3>⚙️ Settings</h3>
+        <button id="btn-close-settings" class="icon-btn">✕</button>
+      </div>
+      <div class="settings-body">
+        <div class="setting-item">
+          <label>Default Language</label>
+          <select id="setting-language">
+            <option value="en">English</option>
+            <option value="bn">বাংলা (Bangla)</option>
+            <option value="both">Both</option>
+          </select>
+        </div>
+        <div class="setting-item">
+          <label>Summary Length</label>
+          <select id="setting-summary-length">
+            <option value="short">Short (3-5 sentences)</option>
+            <option value="medium" selected>Medium (5-8 sentences)</option>
+            <option value="detailed">Detailed (8-12 sentences)</option>
+          </select>
+        </div>
+        <div class="setting-item">
+          <label>Exam Focus</label>
+          <select id="setting-exam-type">
+            <option value="bcs">BCS Exam</option>
+            <option value="bank">Bank Job</option>
+            <option value="admission">University Admission</option>
+            <option value="ntrca">NTRCA</option>
+            <option value="general">General Competitive</option>
+          </select>
+        </div>
+        <div class="setting-item">
+          <label>Auto-detect Newspaper</label>
+          <div class="toggle-switch">
+            <input type="checkbox" id="setting-auto-detect" checked>
+            <label for="setting-auto-detect" class="toggle-label"></label>
+          </div>
+        </div>
+        <div class="setting-item">
+          <label>Dark Mode</label>
+          <div class="toggle-switch">
+            <input type="checkbox" id="setting-dark-mode">
+            <label for="setting-dark-mode" class="toggle-label"></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden">
+      <span id="toast-message"></span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>GK Summary v1.0 | Made for Exam Preparation 🎓</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

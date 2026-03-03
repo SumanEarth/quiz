@@ -1,0 +1,20 @@
+/* GK Summary - Content Script Styles */
+/* These styles are injected into web pages */
+
+#gk-summary-fab {
+  /* Styles are inline for isolation */
+}
+
+#gk-summary-tooltip {
+  /* Styles are inline for isolation */
+}
+
+/* Ensure our elements don't get affected by page styles */
+#gk-summary-fab,
+#gk-summary-tooltip,
+#gk-summary-tooltip * {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  line-height: normal !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}

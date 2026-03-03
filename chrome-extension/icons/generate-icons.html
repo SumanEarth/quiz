@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Icon Generator - GK Summary</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f5f5f5; }
+    canvas { border: 1px solid #ccc; margin: 10px; }
+    .icons { display: flex; gap: 20px; flex-wrap: wrap; align-items: end; }
+    .icon-group { text-align: center; }
+    a { display: block; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <h1>GK Summary Icon Generator</h1>
+  <p>Right-click each canvas and "Save image as..." to save the icons, or click the download links.</p>
+  
+  <div class="icons">
+    <div class="icon-group">
+      <canvas id="icon16" width="16" height="16"></canvas>
+      <p>16x16</p>
+      <a id="dl16" download="icon16.png">Download</a>
+    </div>
+    <div class="icon-group">
+      <canvas id="icon32" width="32" height="32"></canvas>
+      <p>32x32</p>
+      <a id="dl32" download="icon32.png">Download</a>
+    </div>
+    <div class="icon-group">
+      <canvas id="icon48" width="48" height="48"></canvas>
+      <p>48x48</p>
+      <a id="dl48" download="icon48.png">Download</a>
+    </div>
+    <div class="icon-group">
+      <canvas id="icon128" width="128" height="128"></canvas>
+      <p>128x128</p>
+      <a id="dl128" download="icon128.png">Download</a>
+    </div>
+  </div>
+
+  <script>
+    function drawIcon(canvas) {
+      const ctx = canvas.getContext('2d');
+      const size = canvas.width;
+      const scale = size / 128;
+
+      // Background gradient
+      const gradient = ctx.createLinearGradient(0, 0, size, size);
+      gradient.addColorStop(0, '#2563eb');
+      gradient.addColorStop(1, '#7c3aed');
+
+      // Rounded rectangle background
+      const radius = 24 * scale;
+      ctx.beginPath();
+      ctx.moveTo(radius, 0);
+      ctx.lineTo(size - radius, 0);
+      ctx.quadraticCurveTo(size, 0, size, radius);
+      ctx.lineTo(size, size - radius);
+      ctx.quadraticCurveTo(size, size, size - radius, size);
+      ctx.lineTo(radius, size);
+      ctx.quadraticCurveTo(0, size, 0, size - radius);
+      ctx.lineTo(0, radius);
+      ctx.quadraticCurveTo(0, 0, radius, 0);
+      ctx.closePath();
+      ctx.fillStyle = gradient;
+      ctx.fill();
+
+      // Draw "GK" text
+      ctx.fillStyle = 'white';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      
+      if (size >= 48) {
+        // Large icon - show "GK" with document icon
+        ctx.font = `bold ${42 * scale}px 'Segoe UI', Arial, sans-serif`;
+        ctx.fillText('GK', size / 2, size * 0.38);
+        
+        // Small summary lines
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.lineWidth = 3 * scale;
+        ctx.lineCap = 'round';
+        
+        const lineY = size * 0.65;
+        const lineWidth = size * 0.5;
+        const startX = (size - lineWidth) / 2;
+        
+        ctx.beginPath();
+        ctx.moveTo(startX, lineY);
+        ctx.lineTo(startX + lineWidth, lineY);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.moveTo(startX, lineY + 8 * scale);
+        ctx.lineTo(startX + lineWidth * 0.7, lineY + 8 * scale);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.moveTo(startX, lineY + 16 * scale);
+        ctx.lineTo(startX + lineWidth * 0.85, lineY + 16 * scale);
+        ctx.stroke();
+      } else if (size >= 32) {
+        ctx.font = `bold ${20 * scale}px 'Segoe UI', Arial, sans-serif`;
+        ctx.fillText('GK', size / 2, size * 0.42);
+        
+        // Lines
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.lineWidth = 2 * scale;
+        ctx.lineCap = 'round';
+        
+        const lineY = size * 0.68;
+        ctx.beginPath();
+        ctx.moveTo(size * 0.25, lineY);
+        ctx.lineTo(size * 0.75, lineY);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.moveTo(size * 0.25, lineY + 5 * scale);
+        ctx.lineTo(size * 0.65, lineY + 5 * scale);
+        ctx.stroke();
+      } else {
+        // 16px - just "GK"
+        ctx.font = `bold ${11}px 'Segoe UI', Arial, sans-serif`;
+        ctx.fillText('GK', size / 2, size / 2 + 1);
+      }
+
+      return canvas;
+    }
+
+    // Generate all icons
+    [16, 32, 48, 128].forEach(size => {
+      const canvas = document.getElementById(`icon${size}`);
+      drawIcon(canvas);
+      
+      const link = document.getElementById(`dl${size}`);
+      link.href = canvas.toDataURL('image/png');
+    });
+  </script>
+</body>
+</html>
