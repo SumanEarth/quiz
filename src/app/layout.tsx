@@ -13,8 +13,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Next.js Template",
-  description: "A minimal Next.js starter template",
+  title: "GK Summary - Exam Prep Key Points | Chrome Extension Download",
+  description: "Download GK Summary Chrome Extension - Summarize any webpage, extract key points, and generate quizzes for BCS, Bank Job, Admission & NTRCA exam preparation. Supports Bangla & English newspapers. 100% offline, privacy-first.",
+  keywords: "Chrome extension, GK summary, exam prep, BCS preparation, Bank Job preparation, Bangla news summarizer, English news summarizer, key points extractor, quiz generator, competitive exam, NTRCA, admission test, Prothom Alo summarizer, Kaler Kantho summarizer",
+  openGraph: {
+    title: "GK Summary - Exam Prep Key Points",
+    description: "Summarize any webpage, extract key points, and generate quizzes for competitive exam preparation. Supports Bangla & English newspapers.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
