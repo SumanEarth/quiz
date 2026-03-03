@@ -85,6 +85,24 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Support */}
+        <div className="pt-2">
+          <p className="text-neutral-500 text-sm mb-3">
+            Enjoying the extension? Support its development!
+          </p>
+          <a
+            href="https://buymeacoffee.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 transition-colors text-neutral-900 font-semibold px-6 py-2.5 rounded-lg"
+          >
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+              <path d="M2.004 21.547c-.199 0-.398-.06-.567-.178a.816.816 0 01-.257-.432l-.38-2.53c-.235-1.453.03-2.688.747-3.473a5.49 5.49 0 012.62-1.49c.65-.18 1.41-.18 2.28 0 .87.18 1.803.52 2.8 1.02l2.14 1.07c.38.19.79.19 1.17 0l2.14-1.07c.997-.5 1.93-.84 2.8-1.02.87-.18 1.63-.18 2.28 0a5.49 5.49 0 012.62 1.49c.716.785.98 2.02.746 3.473l-.38 2.53a.816.816 0 01-.257.432.719.719 0 01-.567.178h-1.155a.73.73 0 01-.528-.22l-.424-.424a.73.73 0 00-.528-.22h-1.192a.73.73 0 00-.528.22l-.53.53a.73.73 0 01-.528.22H8.458a.73.73 0 01-.528-.22l-.53-.53a.73.73 0 00-.528-.22H5.67a.73.73 0 00-.528.22l-.424.424a.73.73 0 01-.528.22H2.004zm10.348-2.194c-.652 0-1.18-.453-1.18-1.012 0-.56.528-1.013 1.18-1.013.652 0 1.18.453 1.18 1.013 0 .559-.528 1.012-1.18 1.012zm4.708 0c-.652 0-1.18-.453-1.18-1.012 0-.56.528-1.013 1.18-1.013.652 0 1.18.453 1.18 1.013 0 .559-.528 1.012-1.18 1.012z"/>
+            </svg>
+            Buy Me a Coffee
+          </a>
+        </div>
+
         <p className="text-neutral-500 text-xs">
           Supports Bangla &amp; English · BCS, Bank Job, Admission &amp; NTRCA presets
         </p>
