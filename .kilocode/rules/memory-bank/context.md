@@ -34,17 +34,23 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. A
   - [x] Privacy policy
   - [x] README with publishing instructions
   - [x] ZIP package for Chrome Web Store upload
+- [x] **Fixed ZIP download & added download page**
+  - [x] Recreated ZIP with all files (README.md, PRIVACY_POLICY.md included)
+  - [x] Copied ZIP to `public/` for Next.js static serving
+  - [x] Created download page at `src/app/page.tsx` with download button & install instructions
+  - [x] Feature highlights grid (Summaries, Key Points, Quiz, Offline)
 
 ## Current Structure
 
 | File/Directory | Purpose | Status |
 |----------------|---------|--------|
-| `src/app/page.tsx` | Home page | ✅ Ready |
+| `src/app/page.tsx` | Download page for extension | ✅ Ready |
 | `src/app/layout.tsx` | Root layout | ✅ Ready |
 | `src/app/globals.css` | Global styles | ✅ Ready |
 | `.kilocode/` | AI context & recipes | ✅ Ready |
-| `chrome-extension/` | Chrome Extension | ✅ Ready to publish |
-| `gk-summary-extension.zip` | Publishable ZIP | ✅ Ready |
+| `chrome-extension/` | Chrome Extension source | ✅ Ready to publish |
+| `gk-summary-extension.zip` | Publishable ZIP (root) | ✅ Ready |
+| `public/gk-summary-extension.zip` | Downloadable ZIP (served by Next.js) | ✅ Ready |
 
 ## Chrome Extension Details
 
@@ -77,3 +83,4 @@ chrome-extension/
 |------|---------|
 | Initial | Template created with base setup |
 | 2026-03-03 | Built Chrome Extension: GK Summary - Exam Prep Key Points |
+| 2026-03-03 | Fixed ZIP download & added download page with install instructions |
