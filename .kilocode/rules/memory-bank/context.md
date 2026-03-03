@@ -84,3 +84,4 @@ chrome-extension/
 | Initial | Template created with base setup |
 | 2026-03-03 | Built Chrome Extension: GK Summary - Exam Prep Key Points |
 | 2026-03-03 | Fixed ZIP download & added download page with install instructions |
+| 2026-03-03 | Created promo tile (440x280) for Chrome Web Store |
