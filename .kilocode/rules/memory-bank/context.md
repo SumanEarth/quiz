@@ -39,6 +39,11 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. A
   - [x] Copied ZIP to `public/` for Next.js static serving
   - [x] Created download page at `src/app/page.tsx` with download button & install instructions
   - [x] Feature highlights grid (Summaries, Key Points, Quiz, Offline)
+- [x] **Improved Quiz functionality**
+  - [x] Allow changing answer selection before moving to next question
+  - [x] Enhanced feedback showing correct answer label (A, B, C, D)
+  - [x] Added visual animations (pulse for correct, shake for incorrect)
+  - [x] Better explanation styling with clear correct/incorrect indicators
 
 ## Current Structure
 
@@ -85,3 +90,4 @@ chrome-extension/
 | 2026-03-03 | Built Chrome Extension: GK Summary - Exam Prep Key Points |
 | 2026-03-03 | Fixed ZIP download & added download page with install instructions |
 | 2026-03-03 | Created promo tile (440x280) for Chrome Web Store |
+| 2026-03-03 | Improved Quiz: allow answer changes, show correct label (A/B/C/D), add animations |

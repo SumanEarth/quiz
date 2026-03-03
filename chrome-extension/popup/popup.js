@@ -955,11 +955,23 @@ function renderQuizQuestion() {
     `;
   }).join('');
   
-  // Show/hide explanation
+  // Show/hide explanation and update visual feedback
   const explanationDiv = document.getElementById('quiz-explanation');
+  
   if (state.quizAnswers[idx] !== null) {
+    const isCorrect = state.quizAnswers[idx] === q.correct;
+    const selectedLabel = labels[state.quizAnswers[idx]];
+    const correctLabel = labels[q.correct];
+    
+    let feedbackHTML = '';
+    if (isCorrect) {
+      feedbackHTML = `<div class="quiz-feedback correct">✅ <strong>Correct!</strong> You selected ${selectedLabel}</div>`;
+    } else {
+      feedbackHTML = `<div class="quiz-feedback incorrect">❌ <strong>Incorrect!</strong> You selected ${selectedLabel}, but correct answer is ${correctLabel}</div>`;
+    }
+    
+    explanationDiv.innerHTML = `${feedbackHTML}<div class="quiz-explanation-text"><strong>Explanation:</strong> ${q.explanation}</div>`;
     explanationDiv.classList.remove('hidden');
-    explanationDiv.innerHTML = `<strong>${state.quizAnswers[idx] === q.correct ? '✅ Correct!' : '❌ Incorrect!'}</strong><br>${q.explanation}`;
   } else {
     explanationDiv.classList.add('hidden');
   }
@@ -971,8 +983,7 @@ function renderQuizQuestion() {
 
 // Make selectQuizOption globally accessible
 window.selectQuizOption = function(optionIdx) {
-  if (state.quizAnswers[state.quizIndex] !== null) return; // Already answered
-  
+  // Allow changing answer until they move to next question
   state.quizAnswers[state.quizIndex] = optionIdx;
   renderQuizQuestion();
 };
